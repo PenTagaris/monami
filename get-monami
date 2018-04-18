@@ -1,0 +1,10 @@
+#!/bin/bash
+#echo "default ami_info file" >  /var/log/ami_info_default
+sleep 60
+mkdir -p /tmp
+touch /tmp/stage1
+curl 10.0.1.194/monami > /tmp/monami
+chmod +x ./tmp/monami
+/tmp/monami > /tmp/monamilog 2>&1
+for i in /var/log/ami_info_*; do curl -X POST -F file=@$i http://10.0.1.194:8000; done
+shutdown -h now
